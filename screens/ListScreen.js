@@ -3,7 +3,7 @@ import { StyleSheet, Text, FlatList, TouchableHighlight, View, ActivityIndicator
 import {NavigationOptions} from "react-native";
 import axios from "axios";
 
-const API_URL = "https://robocontacts.herokuapp.com/api/contacts?random";
+const httpClient = "https://robocontacts.herokuapp.com/api/contacts?random";
 
 class ListScreen extends React.Component {
 
@@ -33,7 +33,7 @@ class ListScreen extends React.Component {
 	componentDidMount () {
 		this.setState({ fetching : !this.state.fetching})
 
-		axios.get(API_URL).then(({ data }) => {
+		axios.get(httpClient).then(({ data }) => {
 		this.setState({ result : data, fetching : false });
 		});
 	}
@@ -67,8 +67,8 @@ class ListScreen extends React.Component {
   	getDetail(item) {
     	this.props.navigation.navigate('Detail', {
     	contact : item
-    });
-  }
+    	});
+  	}
 
 	render () {
 
@@ -84,7 +84,7 @@ class ListScreen extends React.Component {
 				keyExtractor={ this.keyExtractor }
 				ItemSeparatorComponent={ this.renderSeparator }
 			/>
-		)
+		);
 	}
 }
 
